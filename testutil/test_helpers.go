@@ -8,14 +8,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cosmos/ibc-go/v4/modules/apps/transfer/types"
+	"github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
 
 	"github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
-	"github.com/cosmos/cosmos-sdk/simapp"
+	"github.com/cosmos/cosmos-sdk/testutil/sims"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	icatypes "github.com/cosmos/ibc-go/v4/modules/apps/27-interchain-accounts/types"
-	channeltypes "github.com/cosmos/ibc-go/v4/modules/core/04-channel/types"
+	icatypes "github.com/cosmos/ibc-go/v7/modules/apps/27-interchain-accounts/types"
+	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
 	ibctesting "github.com/cosmos/interchain-security/legacy_ibc_testing/testing"
 	icssimapp "github.com/cosmos/interchain-security/testutil/ibc_testing"
 	"github.com/stretchr/testify/suite"
@@ -24,7 +24,7 @@ import (
 
 	tokenfactorytypes "github.com/neutron-org/neutron/x/tokenfactory/types"
 
-	clienttypes "github.com/cosmos/ibc-go/v4/modules/core/02-client/types"
+	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
 	appProvider "github.com/cosmos/interchain-security/app/provider"
 	e2e "github.com/cosmos/interchain-security/testutil/integration"
 	tmtypes "github.com/tendermint/tendermint/types"
@@ -385,7 +385,7 @@ func SetupTestingApp() (ibctesting.TestingApp, map[string]json.RawMessage) {
 		0,
 		encoding,
 		app.GetEnabledProposals(),
-		simapp.EmptyAppOptions{},
+		sims.EmptyAppOptions{},
 		nil,
 	)
 	return testApp, app.NewDefaultGenesisState(testApp.AppCodec())

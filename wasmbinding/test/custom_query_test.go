@@ -14,7 +14,7 @@ import (
 	"github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmvmtypes "github.com/CosmWasm/wasmvm/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	host "github.com/cosmos/ibc-go/v4/modules/core/24-host"
+	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
 	abci "github.com/tendermint/tendermint/abci/types"
 
 	"github.com/neutron-org/neutron/app"

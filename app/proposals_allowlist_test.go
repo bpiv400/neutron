@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	simapp "github.com/cosmos/cosmos-sdk/simapp"
+	"github.com/cosmos/cosmos-sdk/testutil/sims"
 	ibctesting "github.com/cosmos/interchain-security/legacy_ibc_testing/testing"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/log"
@@ -38,7 +38,7 @@ func SetupTestingAppConsumer() (ibctesting.TestingApp, map[string]json.RawMessag
 		0,
 		encoding,
 		app.GetEnabledProposals(),
-		simapp.EmptyAppOptions{},
+		sims.EmptyAppOptions{},
 		nil,
 	)
 	return testApp, app.NewDefaultGenesisState(encoding.Marshaler)

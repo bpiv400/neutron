@@ -12,8 +12,8 @@ import (
 	"github.com/neutron-org/neutron/app/params"
 
 	wasmKeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
-	ibcclienttypes "github.com/cosmos/ibc-go/v4/modules/core/02-client/types"
-	host "github.com/cosmos/ibc-go/v4/modules/core/24-host"
+	ibcclienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
+	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
 	abci "github.com/tendermint/tendermint/abci/types"
 
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
