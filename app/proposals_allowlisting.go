@@ -9,7 +9,7 @@ import (
 	icahosttypes "github.com/cosmos/ibc-go/v7/modules/apps/27-interchain-accounts/host/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
 	ibcclienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
-	packetforwardmiddlewaretypes "github.com/strangelove-ventures/packet-forward-middleware/v4/router/types"
+	packetforwardmiddlewaretypes "github.com/strangelove-ventures/packet-forward-middleware/v7/router/types"
 
 	crontypes "github.com/neutron-org/neutron/x/cron/types"
 	feeburnertypes "github.com/neutron-org/neutron/x/feeburner/types"

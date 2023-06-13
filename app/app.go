@@ -16,6 +16,12 @@ import (
 
 	"github.com/CosmWasm/wasmd/x/wasm"
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
+	dbm "github.com/cometbft/cometbft-db"
+	abci "github.com/cometbft/cometbft/abci/types"
+	tmjson "github.com/cometbft/cometbft/libs/json"
+	"github.com/cometbft/cometbft/libs/log"
+	tmos "github.com/cometbft/cometbft/libs/os"
+	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/grpc/tmservice"
@@ -30,7 +36,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/version"
 	"github.com/cosmos/cosmos-sdk/x/auth"
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
-	authrest "github.com/cosmos/cosmos-sdk/x/auth/client/rest"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	authsims "github.com/cosmos/cosmos-sdk/x/auth/simulation"
 	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
@@ -83,12 +88,6 @@ import (
 	"github.com/cosmos/interchain-security/legacy_ibc_testing/core"
 	ibctesting "github.com/cosmos/interchain-security/legacy_ibc_testing/testing"
 	"github.com/spf13/cast"
-	abci "github.com/tendermint/tendermint/abci/types"
-	tmjson "github.com/tendermint/tendermint/libs/json"
-	"github.com/tendermint/tendermint/libs/log"
-	tmos "github.com/tendermint/tendermint/libs/os"
-	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
-	dbm "github.com/tendermint/tm-db"
 
 	cronkeeper "github.com/neutron-org/neutron/x/cron/keeper"
 	crontypes "github.com/neutron-org/neutron/x/cron/types"
@@ -103,8 +102,6 @@ import (
 	adminmodulemoduletypes "github.com/cosmos/admin-module/x/adminmodule/types"
 	govclient "github.com/cosmos/cosmos-sdk/x/gov/client"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	paramsrest "github.com/cosmos/cosmos-sdk/x/params/client/rest"
-	upgraderest "github.com/cosmos/cosmos-sdk/x/upgrade/client/rest"
 
 	appparams "github.com/neutron-org/neutron/app/params"
 	"github.com/neutron-org/neutron/docs"
@@ -135,9 +132,9 @@ import (
 	ccvconsumerkeeper "github.com/cosmos/interchain-security/x/ccv/consumer/keeper"
 	ccvconsumertypes "github.com/cosmos/interchain-security/x/ccv/consumer/types"
 
-	"github.com/strangelove-ventures/packet-forward-middleware/v4/router"
-	routerkeeper "github.com/strangelove-ventures/packet-forward-middleware/v4/router/keeper"
-	routertypes "github.com/strangelove-ventures/packet-forward-middleware/v4/router/types"
+	"github.com/strangelove-ventures/packet-forward-middleware/v7/router"
+	routerkeeper "github.com/strangelove-ventures/packet-forward-middleware/v7/router/keeper"
+	routertypes "github.com/strangelove-ventures/packet-forward-middleware/v7/router/types"
 )
 
 const (

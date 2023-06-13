@@ -5,11 +5,11 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/cometbft/cometbft/proto/tendermint/crypto"
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
 	"github.com/stretchr/testify/require"
-	"github.com/tendermint/tendermint/proto/tendermint/crypto"
 
 	iqtypes "github.com/neutron-org/neutron/x/interchainqueries/types"
 )

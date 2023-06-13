@@ -3,6 +3,7 @@ package app
 import (
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmTypes "github.com/CosmWasm/wasmd/x/wasm/types"
+	"github.com/cometbft/cometbft/libs/log"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
@@ -10,7 +11,6 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v7/modules/core/keeper"
 	consumerante "github.com/cosmos/interchain-security/app/consumer/ante"
 	ibcconsumerkeeper "github.com/cosmos/interchain-security/x/ccv/consumer/keeper"
-	"github.com/tendermint/tendermint/libs/log"
 )
 
 // HandlerOptions extend the SDK's AnteHandler options by requiring the IBC

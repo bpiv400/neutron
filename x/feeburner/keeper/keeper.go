@@ -6,12 +6,12 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
+	"github.com/cometbft/cometbft/libs/log"
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	consumertypes "github.com/cosmos/interchain-security/x/ccv/consumer/types"
-	"github.com/tendermint/tendermint/libs/log"
 
 	"github.com/neutron-org/neutron/x/feeburner/types"
 )

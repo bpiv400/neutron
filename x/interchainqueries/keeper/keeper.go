@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/cometbft/cometbft/libs/log"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
@@ -12,8 +13,7 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	ibcclienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
 	ibckeeper "github.com/cosmos/ibc-go/v7/modules/core/keeper"
-	tendermintLightClientTypes "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint/types"
-	"github.com/tendermint/tendermint/libs/log"
+	tendermintLightClientTypes "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
 
 	"github.com/neutron-org/neutron/x/interchainqueries/types"
 )

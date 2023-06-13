@@ -8,7 +8,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	querytypes "github.com/cosmos/cosmos-sdk/types/query"
 	contypes "github.com/cosmos/ibc-go/v7/modules/core/03-connection/types"
-	tndtypes "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint/types"
+	tndtypes "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
 	"github.com/gogo/protobuf/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

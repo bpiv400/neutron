@@ -12,7 +12,7 @@ package app_test
 // 	simulationtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 // 	"github.com/cosmos/cosmos-sdk/x/simulation"
 // 	"github.com/stretchr/testify/require"
-// 	abci "github.com/tendermint/tendermint/abci/types"
+// 	abci "github.com/cometbft/cometbft/abci/types"
 
 // 	"github.com/neutron-org/neutron/app"
 // )

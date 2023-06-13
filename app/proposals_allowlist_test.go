@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"testing"
 
+	tmdb "github.com/cometbft/cometbft-db"
+	"github.com/cometbft/cometbft/libs/log"
 	"github.com/cosmos/cosmos-sdk/testutil/sims"
 	ibctesting "github.com/cosmos/interchain-security/legacy_ibc_testing/testing"
 	"github.com/stretchr/testify/require"
-	"github.com/tendermint/tendermint/libs/log"
-	tmdb "github.com/tendermint/tm-db"
 
 	"github.com/neutron-org/neutron/app"
 )

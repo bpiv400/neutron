@@ -3,6 +3,8 @@ package testutil
 import (
 	"testing"
 
+	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
+	tmtypes "github.com/cometbft/cometbft/types"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
@@ -11,8 +13,6 @@ import (
 	"github.com/cosmos/ibc-go/v7/testing/mock"
 	legacyibctesting "github.com/cosmos/interchain-security/legacy_ibc_testing/testing"
 	"github.com/stretchr/testify/require"
-	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
-	tmtypes "github.com/tendermint/tendermint/types"
 
 	"github.com/neutron-org/neutron/app/params"
 )

@@ -12,6 +12,8 @@ import (
 
 	"github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
+	dbm "github.com/cometbft/cometbft-db"
+	"github.com/cometbft/cometbft/libs/log"
 	"github.com/cosmos/cosmos-sdk/testutil/sims"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	icatypes "github.com/cosmos/ibc-go/v7/modules/apps/27-interchain-accounts/types"
@@ -19,15 +21,13 @@ import (
 	ibctesting "github.com/cosmos/interchain-security/legacy_ibc_testing/testing"
 	icssimapp "github.com/cosmos/interchain-security/testutil/ibc_testing"
 	"github.com/stretchr/testify/suite"
-	"github.com/tendermint/tendermint/libs/log"
-	dbm "github.com/tendermint/tm-db"
 
 	tokenfactorytypes "github.com/neutron-org/neutron/x/tokenfactory/types"
 
+	tmtypes "github.com/cometbft/cometbft/types"
 	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
 	appProvider "github.com/cosmos/interchain-security/app/provider"
 	e2e "github.com/cosmos/interchain-security/testutil/integration"
-	tmtypes "github.com/tendermint/tendermint/types"
 
 	"github.com/neutron-org/neutron/app"
 	ictxstypes "github.com/neutron-org/neutron/x/interchaintxs/types"
@@ -302,8 +302,8 @@ func (suite *IBCConnectionTestSuite) InstantiateReflectContract(ctx sdk.Context,
 
 func NewICAPath(chainA, chainB, chainProvider *ibctesting.TestChain) *ibctesting.Path {
 	path := ibctesting.NewPath(chainA, chainB)
-	path.EndpointA.ChannelConfig.PortID = icatypes.PortID
-	path.EndpointB.ChannelConfig.PortID = icatypes.PortID
+	path.EndpointA.ChannelConfig.PortID = icatypes.HostPortID
+	path.EndpointB.ChannelConfig.PortID = icatypes.HostPortID
 	path.EndpointA.ChannelConfig.Order = channeltypes.ORDERED
 	path.EndpointB.ChannelConfig.Order = channeltypes.ORDERED
 	path.EndpointA.ChannelConfig.Version = TestVersion
