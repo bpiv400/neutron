@@ -131,7 +131,7 @@ func CommitBlock(coord *ibctesting.Coordinator, chains ...*ibctesting.TestChain)
 
 // UpdateClient updates the IBC client associated with the endpoint.
 func UpdateClient(endpoint *ibctesting.Endpoint) (err error) {
-	var header exported.Header
+	var header exported.ClientMessage
 
 	// ensure counterparty has committed state
 	CommitBlock(endpoint.Chain.Coordinator, endpoint.Counterparty.Chain)
@@ -332,52 +332,52 @@ func TestSudoHasAddress(t *testing.T) {
 	err = k.ProcessBlock(ctx, address, 1, "tendermint-07", &block)
 	require.ErrorContains(t, err, "failed to unpack block header")
 
-	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.Header(&header), nil)
+	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.ClientMessage(&header), nil)
 	hv.EXPECT().UnpackHeader(packedNextHeader).Return(nil, fmt.Errorf("failed to unpack packedHeader"))
 	err = k.ProcessBlock(ctx, address, 1, "tendermint-07", &block)
 	require.ErrorContains(t, err, "failed to unpack next block header")
 
-	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.Header(&header), nil)
-	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.Header(&nextHeader), nil)
-	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.Header(&header), exported.Header(&nextHeader)).Return(fmt.Errorf("failed to verify headers"))
+	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.ClientMessage(&header), nil)
+	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.ClientMessage(&nextHeader), nil)
+	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.ClientMessage(&header), exported.ClientMessage(&nextHeader)).Return(fmt.Errorf("failed to verify headers"))
 	err = k.ProcessBlock(ctx, address, 1, "tendermint-07", &block)
 	require.ErrorContains(t, err, "failed to verify headers")
 
-	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.Header(&header), nil)
-	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.Header(&nextHeader), nil)
-	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.Header(&header), exported.Header(&nextHeader)).Return(nil)
+	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.ClientMessage(&header), nil)
+	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.ClientMessage(&nextHeader), nil)
+	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.ClientMessage(&header), exported.ClientMessage(&nextHeader)).Return(nil)
 	tv.EXPECT().VerifyTransaction(&header, &nextHeader, &tx).Return(fmt.Errorf("failed to verify transaction"))
 	err = k.ProcessBlock(ctx, address, 1, "tendermint-07", &block)
 	require.ErrorContains(t, err, "failed to verifyTransaction")
 
-	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.Header(&header), nil)
-	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.Header(&nextHeader), nil)
-	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.Header(&header), exported.Header(&nextHeader)).Return(nil)
+	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.ClientMessage(&header), nil)
+	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.ClientMessage(&nextHeader), nil)
+	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.ClientMessage(&header), exported.ClientMessage(&nextHeader)).Return(nil)
 	tv.EXPECT().VerifyTransaction(&header, &nextHeader, &tx).Return(nil)
 	cm.EXPECT().SudoTxQueryResult(ctx, address, uint64(1), ibcclienttypes.NewHeight(1, uint64(header.Header.Height)), tx.GetData()).Return(nil, fmt.Errorf("contract error"))
 	err = k.ProcessBlock(ctx, address, 1, "tendermint-07", &block)
 	require.ErrorContains(t, err, "rejected transaction query result")
 
 	// all error flows passed, time to success
-	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.Header(&header), nil)
-	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.Header(&nextHeader), nil)
-	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.Header(&header), exported.Header(&nextHeader)).Return(nil)
+	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.ClientMessage(&header), nil)
+	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.ClientMessage(&nextHeader), nil)
+	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.ClientMessage(&header), exported.ClientMessage(&nextHeader)).Return(nil)
 	tv.EXPECT().VerifyTransaction(&header, &nextHeader, &tx).Return(nil)
 	cm.EXPECT().SudoTxQueryResult(ctx, address, uint64(1), ibcclienttypes.NewHeight(1, uint64(header.Header.Height)), tx.GetData()).Return(nil, nil)
 	err = k.ProcessBlock(ctx, address, 1, "tendermint-07", &block)
 	require.NoError(t, err)
 
 	// no functions calls after VerifyHeaders means we try to process tx second time
-	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.Header(&header), nil)
-	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.Header(&nextHeader), nil)
-	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.Header(&header), exported.Header(&nextHeader)).Return(nil)
+	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.ClientMessage(&header), nil)
+	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.ClientMessage(&nextHeader), nil)
+	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.ClientMessage(&header), exported.ClientMessage(&nextHeader)).Return(nil)
 	err = k.ProcessBlock(ctx, address, 1, "tendermint-07", &block)
 	require.NoError(t, err)
 
 	// same tx + another queryID
-	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.Header(&header), nil)
-	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.Header(&nextHeader), nil)
-	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.Header(&header), exported.Header(&nextHeader)).Return(nil)
+	hv.EXPECT().UnpackHeader(packedHeader).Return(exported.ClientMessage(&header), nil)
+	hv.EXPECT().UnpackHeader(packedNextHeader).Return(exported.ClientMessage(&nextHeader), nil)
+	hv.EXPECT().VerifyHeaders(ctx, clientkeeper.Keeper{}, "tendermint-07", exported.ClientMessage(&header), exported.ClientMessage(&nextHeader)).Return(nil)
 	tv.EXPECT().VerifyTransaction(&header, &nextHeader, &tx).Return(nil)
 	cm.EXPECT().SudoTxQueryResult(ctx, address, uint64(2), ibcclienttypes.NewHeight(1, uint64(header.Header.Height)), tx.GetData()).Return(nil, nil)
 	err = k.ProcessBlock(ctx, address, 2, "tendermint-07", &block)

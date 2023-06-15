@@ -4,17 +4,18 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	tendermint "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
 	"net/url"
 	"strconv"
 	"time"
 
-	ics23 "github.com/confio/ics23/go"
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	ibcclienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
 	ibcconnectiontypes "github.com/cosmos/ibc-go/v7/modules/core/03-connection/types"
 	ibccommitmenttypes "github.com/cosmos/ibc-go/v7/modules/core/23-commitment/types"
+	ics23 "github.com/cosmos/ics23/go"
 
 	"github.com/neutron-org/neutron/x/interchainqueries/types"
 )
@@ -193,11 +194,11 @@ func (k msgServer) SubmitQueryResult(goCtx context.Context, msg *types.MsgSubmit
 			return nil, sdkerrors.Wrapf(ibcclienttypes.ErrConsensusStateNotFound, "failed to get consensus state: %v", err)
 		}
 
-		consensusState, err := ibcclienttypes.UnpackConsensusState(resp.ConsensusState)
-		if err != nil {
+		consensusState, ok := resp.ConsensusState.GetCachedValue().(tendermint.ConsensusState)
+		if !ok {
 			ctx.Logger().Error("SubmitQueryResult: failed to UnpackConsensusState",
 				"error", err, "query", query, "message", msg)
-			return nil, sdkerrors.Wrapf(types.ErrProtoUnmarshal, "failed to unpack consesus state: %v", err)
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrUnpackAny, "cannot unpack Any into ConsensusState %T", resp.ConsensusState)
 		}
 
 		clientState, err := k.GetClientState(ctx, msg.ClientId)

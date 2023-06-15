@@ -1,6 +1,7 @@
 package transfer
 
 import (
+	"cosmossdk.io/core/appmodule"
 	"fmt"
 
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -68,6 +69,8 @@ func (im IBCModule) OnTimeoutPacket(
 	return im.HandleTimeout(ctx, packet, relayer)
 }
 
+var _ appmodule.AppModule = AppModule{}
+
 type AppModule struct {
 	transfer.AppModule
 	keeper wrapkeeper.KeeperTransferWrapper
@@ -79,6 +82,14 @@ func NewAppModule(k wrapkeeper.KeeperTransferWrapper) AppModule {
 		AppModule: transfer.NewAppModule(k.Keeper),
 		keeper:    k,
 	}
+}
+
+// IsOnePerModuleType implements the depinject.OnePerModuleType interface.
+func (am AppModule) IsOnePerModuleType() { // marker
+}
+
+// IsAppModule implements the appmodule.AppModule interface.
+func (am AppModule) IsAppModule() { // marker
 }
 
 // RegisterServices registers module services.
@@ -113,11 +124,6 @@ func (am AppModuleBasic) RegisterInterfaces(reg cdctypes.InterfaceRegistry) {
 // Name returns the capability module's name.
 func (am AppModule) Name() string {
 	return am.AppModuleBasic.Name()
-}
-
-// Deprecated: Route returns the capability module's message routing key.
-func (am AppModule) Route() sdk.Route {
-	return sdk.NewRoute(types.RouterKey, NewHandler(am.keeper))
 }
 
 func NewHandler(k wrapkeeper.KeeperTransferWrapper) sdk.Handler {

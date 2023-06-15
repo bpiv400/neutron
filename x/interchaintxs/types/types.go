@@ -33,7 +33,7 @@ func NewICAOwnerFromAddress(address sdk.AccAddress, interchainAccountID string) 
 }
 
 func ICAOwnerFromPort(port string) (ICAOwner, error) {
-	splitOwner := strings.SplitN(strings.TrimPrefix(port, icatypes.PortPrefix), Delimiter, 2)
+	splitOwner := strings.SplitN(strings.TrimPrefix(port, icatypes.PortKeyPrefix), Delimiter, 2)
 	if len(splitOwner) < 2 {
 		return ICAOwner{}, sdkerrors.Wrap(ErrInvalidICAOwner, "invalid ICA interchainAccountID format")
 	}
