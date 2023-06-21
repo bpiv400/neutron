@@ -41,7 +41,7 @@ func TestHandleAcknowledgement(t *testing.T) {
 	require.NoError(t, err)
 	p := channeltypes.Packet{
 		Sequence:      100,
-		SourcePort:    icatypes.PortPrefix + testutil.TestOwnerAddress + ".ica0",
+		SourcePort:    icatypes.ControllerPortPrefix + testutil.TestOwnerAddress + ".ica0",
 		SourceChannel: "channel-0",
 	}
 	contractAddress := sdk.MustAccAddressFromBech32(testutil.TestOwnerAddress)
@@ -125,7 +125,7 @@ func TestHandleTimeout(t *testing.T) {
 	relayerAddress := sdk.MustAccAddressFromBech32(relayerBech32)
 	p := channeltypes.Packet{
 		Sequence:      100,
-		SourcePort:    icatypes.PortPrefix + testutil.TestOwnerAddress + ".ica0",
+		SourcePort:    icatypes.ControllerPortPrefix + testutil.TestOwnerAddress + ".ica0",
 		SourceChannel: "channel-0",
 	}
 
@@ -168,7 +168,7 @@ func TestHandleChanOpenAck(t *testing.T) {
 	defer ctrl.Finish()
 	cmKeeper := mock_types.NewMockContractManagerKeeper(ctrl)
 	icak, ctx := testkeeper.InterchainTxsKeeper(t, cmKeeper, nil, nil, nil, nil)
-	portID := icatypes.PortPrefix + testutil.TestOwnerAddress + ".ica0"
+	portID := icatypes.ControllerPortPrefix + testutil.TestOwnerAddress + ".ica0"
 	contractAddress := sdk.MustAccAddressFromBech32(testutil.TestOwnerAddress)
 	channelID := "channel-0"
 	counterpartyChannelID := "channel-1"

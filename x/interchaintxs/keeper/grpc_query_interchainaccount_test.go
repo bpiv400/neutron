@@ -35,7 +35,7 @@ func TestKeeper_InterchainAccountAddress(t *testing.T) {
 	require.ErrorContains(t, err, "failed to create ica owner")
 	require.Nil(t, resp)
 
-	portID := fmt.Sprintf("%s%s.%s", types2.PortPrefix, testutil.TestOwnerAddress, "test1")
+	portID := fmt.Sprintf("%s%s.%s", types2.ControllerPortPrefix, testutil.TestOwnerAddress, "test1")
 	icaKeeper.EXPECT().GetInterchainAccountAddress(ctx, "connection-0", portID).Return("", false)
 	resp, err = keeper.InterchainAccountAddress(wctx, &types.QueryInterchainAccountAddressRequest{
 		OwnerAddress:        testutil.TestOwnerAddress,
@@ -45,7 +45,7 @@ func TestKeeper_InterchainAccountAddress(t *testing.T) {
 	require.ErrorContains(t, err, "no interchain account found for portID")
 	require.Nil(t, resp)
 
-	portID = fmt.Sprintf("%s%s.%s", types2.PortPrefix, testutil.TestOwnerAddress, "test1")
+	portID = fmt.Sprintf("%s%s.%s", types2.ControllerPortPrefix, testutil.TestOwnerAddress, "test1")
 	icaKeeper.EXPECT().GetInterchainAccountAddress(ctx, "connection-0", portID).Return("neutron1interchainaccountaddress", true)
 	resp, err = keeper.InterchainAccountAddress(wctx, &types.QueryInterchainAccountAddressRequest{
 		OwnerAddress:        testutil.TestOwnerAddress,
