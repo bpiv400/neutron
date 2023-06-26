@@ -96,6 +96,9 @@ func (am AppModule) IsAppModule() { // marker
 func (am AppModule) RegisterServices(cfg module.Configurator) {
 	neutrontypes.RegisterMsgServer(cfg.MsgServer(), am.keeper)
 	types.RegisterQueryServer(cfg.QueryServer(), am.keeper)
+
+	cfg.MsgServer().RegisterService(&neutrontypes.MsgServiceDescOrig, am.keeper)
+
 }
 
 type AppModuleBasic struct {
