@@ -18,7 +18,7 @@ import (
 	"github.com/neutron-org/neutron/x/interchaintxs/types"
 )
 
-func InterchainTxsKeeper(t testing.TB, managerKeeper types.ContractManagerKeeper, refunderKeeper types.FeeRefunderKeeper, icaControllerKeeper types.ICAControllerKeeper, channelKeeper types.ChannelKeeper, capabilityKeeper types.ScopedKeeper) (*keeper.Keeper, sdk.Context) {
+func InterchainTxsKeeper(t testing.TB, managerKeeper types.ContractManagerKeeper, refunderKeeper types.FeeRefunderKeeper, icaControllerKeeper types.ICAControllerKeeper, channelKeeper types.ChannelKeeper) (*keeper.Keeper, sdk.Context) {
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
@@ -44,7 +44,6 @@ func InterchainTxsKeeper(t testing.TB, managerKeeper types.ContractManagerKeeper
 		paramsSubspace,
 		channelKeeper,
 		icaControllerKeeper,
-		capabilityKeeper,
 		managerKeeper,
 		refunderKeeper,
 	)

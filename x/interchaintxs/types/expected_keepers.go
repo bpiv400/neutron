@@ -46,11 +46,6 @@ type FeeRefunderKeeper interface {
 	DistributeTimeoutFee(ctx sdk.Context, receiver sdk.AccAddress, packetID feerefundertypes.PacketID)
 }
 
-type ScopedKeeper interface {
-	ClaimCapability(ctx sdk.Context, cap *capabilitytypes.Capability, name string) error
-	GetCapability(ctx sdk.Context, name string) (*capabilitytypes.Capability, bool)
-}
-
 // ChannelKeeper defines the expected IBC channel keeper
 type ChannelKeeper interface {
 	GetChannel(ctx sdk.Context, srcPort, srcChan string) (channel channeltypes.Channel, found bool)

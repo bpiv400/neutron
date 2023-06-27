@@ -610,7 +610,6 @@ func New(
 		app.GetSubspace(interchaintxstypes.ModuleName),
 		app.IBCKeeper.ChannelKeeper,
 		app.ICAControllerKeeper,
-		scopedInterTxKeeper,
 		app.ContractManagerKeeper,
 		app.FeeKeeper,
 	)
