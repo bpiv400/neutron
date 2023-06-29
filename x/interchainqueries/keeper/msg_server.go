@@ -193,12 +193,18 @@ func (k msgServer) SubmitQueryResult(goCtx context.Context, msg *types.MsgSubmit
 				"error", err, "query", query, "message", msg)
 			return nil, sdkerrors.Wrapf(ibcclienttypes.ErrConsensusStateNotFound, "failed to get consensus state: %v", err)
 		}
-
-		consensusState, ok := resp.ConsensusState.GetCachedValue().(tendermint.ConsensusState)
-		if !ok {
+		consensusStateI, err := ibcclienttypes.UnpackConsensusState(resp.ConsensusState)
+		if err != nil {
 			ctx.Logger().Error("SubmitQueryResult: failed to UnpackConsensusState",
 				"error", err, "query", query, "message", msg)
-			return nil, sdkerrors.Wrapf(sdkerrors.ErrUnpackAny, "cannot unpack Any into ConsensusState %T", resp.ConsensusState)
+			return nil, fmt.Errorf("failed marshal: %s, %w", consensusStateI.String(), err)
+		}
+
+		consensusState, ok := consensusStateI.(*tendermint.ConsensusState)
+		if !ok {
+			ctx.Logger().Error("SubmitQueryResult: failed to cast exported.ConsensusState to *tendermint.ConsensusState",
+				"error", err, "query", query, "message", msg)
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrUnpackAny, "failed to cast interface exported.ConsensusState to type *tendermint.ConsensusState")
 		}
 
 		clientState, err := k.GetClientState(ctx, msg.ClientId)
