@@ -68,6 +68,7 @@ sed -i -e 's/prometheus-retention-time = 0/prometheus-retention-time = 1000/g' "
 
 sed -i -e 's#"tcp://0.0.0.0:26656"#"tcp://0.0.0.0:'"$P2PPORT"'"#g' "$CHAIN_DIR/config/config.toml"
 sed -i -e 's#"tcp://127.0.0.1:26657"#"tcp://0.0.0.0:'"$RPCPORT"'"#g' "$CHAIN_DIR/config/config.toml"
+sed -i -e 's#"tcp://localhost:1317"#"tcp://0.0.0.0:'"$RESTPORT"'"#g' "$CHAIN_DIR/config/app.toml"
 sed -i -e 's#"tcp://0.0.0.0:1317"#"tcp://0.0.0.0:'"$RESTPORT"'"#g' "$CHAIN_DIR/config/app.toml"
 sed -i -e 's#":8080"#":'"$ROSETTA_1"'"#g' "$CHAIN_DIR/config/app.toml"
 

@@ -41,7 +41,6 @@ require (
 	cosmossdk.io/api v0.3.1 // indirect
 	cosmossdk.io/depinject v1.0.0-alpha.3 // indirect
 	cosmossdk.io/errors v1.0.0-beta.7 // indirect
-	cosmossdk.io/log v1.1.0 // indirect
 	cosmossdk.io/math v1.0.1 // indirect
 	cosmossdk.io/tools/rosetta v0.2.1 // indirect
 	filippo.io/edwards25519 v1.0.0 // indirect
@@ -122,7 +121,6 @@ require (
 	github.com/linxGnu/grocksdb v1.8.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/manifoldco/promptui v0.9.0 // indirect
-	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
 	github.com/mimoo/StrobeGo v0.0.0-20220103164710-9a04d6ca976b // indirect
@@ -142,7 +140,6 @@ require (
 	github.com/rakyll/statik v0.1.7 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
 	github.com/rs/cors v1.8.3 // indirect
-	github.com/rs/zerolog v1.29.1 // indirect
 	github.com/sasha-s/go-deadlock v0.3.1 // indirect
 	github.com/spf13/afero v1.9.5 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
@@ -181,7 +178,7 @@ replace (
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 	github.com/ChainSafe/go-schnorrkel => github.com/ChainSafe/go-schnorrkel v0.0.0-20200405005733-88cbf1b4c40d
 	github.com/CosmWasm/wasmd => github.com/neutron-org/wasmd v0.40.0-rc.0.0.20230628195106-7f39abd759a1
-	github.com/cosmos/admin-module => github.com/neutron-org/admin-module v0.0.0-20230628193235-05127433b9b1
+	github.com/cosmos/admin-module => github.com/neutron-org/admin-module v0.0.0-20230629154156-54b91a541f7f
 	//github.com/cosmos/cosmos-sdk => ../cosmos-sdk
 	github.com/cosmos/interchain-security => github.com/cosmos/interchain-security v1.0.1-0.20230612141232-8cd0ca920812
 	// google.golang.org/grpc => google.golang.org/grpc v1.33.2
