@@ -525,6 +525,7 @@ func New(
 
 	wasmDir := filepath.Join(homePath, "wasm")
 	wasmConfig, err := wasm.ReadWasmConfig(appOpts)
+	fmt.Printf("\n\n\n\nWasmCOnfig: %+v\n\n\n\n", wasmConfig)
 	if err != nil {
 		panic(fmt.Sprintf("error while reading wasm config: %s", err))
 	}

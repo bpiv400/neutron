@@ -20,6 +20,9 @@ if [ "$RUN_BACKGROUND" == 1 ]; then
     --pruning=nothing                     \
     --grpc.address="0.0.0.0:$GRPCPORT"    \
     --grpc-web.address="0.0.0.0:$GRPCWEB" \
+    --wasm.memory_cache_size=2050         \
+    --wasm.query_gas_limit=6000001        \
+    --wasm.simulation_gas_limit=8000008   \
     --trace > "$CHAIN_DIR/$CHAINID.log" 2>&1 &
 else
   $BINARY start                           \
@@ -29,6 +32,9 @@ else
     --pruning=nothing                     \
     --grpc.address="0.0.0.0:$GRPCPORT"    \
     --grpc-web.address="0.0.0.0:$GRPCWEB" \
+    --wasm.memory_cache_size=2050         \
+    --wasm.query_gas_limit=6000001        \
+    --wasm.simulation_gas_limit=8000008   \
     --trace 2>&1 | tee "$CHAIN_DIR/$CHAINID.log"
 fi
 
